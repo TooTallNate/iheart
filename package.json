@@ -1,0 +1,35 @@
+{
+  "name": "iheart",
+  "version": "0.0.0",
+  "description": "iHeart Radio JavaScript API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/TooTallNate/iheart.git"
+  },
+  "keywords": [
+    "iheart",
+    "radio",
+    "search",
+    "stream",
+    "resolve",
+    "api"
+  ],
+  "author": "Nathan Rajlich <n@n8.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TooTallNate/iheart/issues"
+  },
+  "homepage": "https://github.com/TooTallNate/iheart#readme",
+  "dependencies": {
+    "debug": "^2.5.2",
+    "ini": "^1.3.4",
+    "isomorphic-fetch": "^2.2.1"
+  },
+  "devDependencies": {
+    "n8-make": "^1.8.0"
+  }
+}
