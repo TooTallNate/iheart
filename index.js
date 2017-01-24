@@ -67,7 +67,24 @@ export async function streams (station) {
     // body.firstError
   }
 
-  return body.streams
+  const imgURLs = new Map()
+  body.img_urls.forEach((o) => {
+    imgURLs.set(o.image_url_id, o.image_url)
+  })
+
+  // absolutize the relativized logo URLs before responding
+  return body.streams.map((stream) => {
+    for (const key of Object.keys(stream)) {
+      const value = stream[key]
+      if ('string' === typeof value) {
+        stream[key] = value.replace(/\{(.+)\}/, (match, inner) => {
+          const baseURL = imgURLs.get(Number(inner.substring(inner.lastIndexOf('_') + 1)))
+          return baseURL + value.substring(match.length)
+        })
+      }
+    }
+    return stream
+  })
 }
 
 /**
