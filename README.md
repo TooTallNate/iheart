@@ -22,7 +22,7 @@ const station = matches.stations[0]
 const streams = await iheart.streams(station)
 const stream = streams[0]
 
-// finally get can get the source stream URL which can
+// finally you can get the source stream URL which can
 // be requested over HTTP and fed into an audio decoder,
 // or whatever your application does with it…
 const url = await iheart.streamURL(stream)
