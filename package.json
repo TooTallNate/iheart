@@ -2,8 +2,9 @@
   "name": "iheart",
   "version": "0.0.0",
   "description": "iHeart Radio JavaScript API",
-  "main": "index.js",
+  "main": "./build/index.js",
   "scripts": {
+    "prepublish": "n8-make",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
