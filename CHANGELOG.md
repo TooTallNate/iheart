@@ -1,3 +1,10 @@
+1.0.1 / 2017-01-26
+==================
+
+* [[`e653a2971e`](https://github.com/TooTallNate/iheart/commit/e653a2971e)] - add `.npmignore` file (Nathan Rajlich)
+* [[`dce43d13e5`](https://github.com/TooTallNate/iheart/commit/dce43d13e5)] - add missing "babel-runtime" dep (Nathan Rajlich)
+* [[`96c25dbb2c`](https://github.com/TooTallNate/iheart/commit/96c25dbb2c)] - add README.md file (Nathan Rajlich)
+
 1.0.0 / 2017-01-25
 ==================
 
