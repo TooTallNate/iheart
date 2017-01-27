@@ -1,6 +1,10 @@
 # iheart
 ### iHeart Radio JavaScript API
 
+Query the iHeart Radio API to search for internet radio stations.
+Get their metadata including name and logos, and resolve high-quality
+stream URLs to play.
+
 
 ## Installation
 
