@@ -1,3 +1,9 @@
+1.0.2 / 2017-05-07
+==================
+
+* [[`b6a84c209f`](https://github.com/TooTallNate/iheart/commit/b6a84c209f)] - use `cors.now.sh` (Nathan Rajlich)
+* [[`70e90f2e07`](https://github.com/TooTallNate/iheart/commit/70e90f2e07)] - README++ (Nathan Rajlich)
+
 1.0.1 / 2017-01-26
 ==================
 
