@@ -17,7 +17,6 @@ const defaultRetryOpts = {
  */
 export default function fetch (url, _opts) {
   const opts = Object.assign({}, defaultRetryOpts, _opts)
-  //console.error(opts)
 
   return retry(async (bail) => {
     const method = (opts.method || 'GET').toUpperCase()
