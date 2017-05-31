@@ -1,8 +1,9 @@
 import { extname } from 'path'
 import createDebug from 'debug'
 import { parse, format } from 'url'
-import fetch from 'isomorphic-fetch'
 import { parse as parseIni } from 'ini'
+
+import fetch from './fetch'
 
 const debug = createDebug('iheart')
 
@@ -23,12 +24,8 @@ export async function search (keyword) {
   const formatted = parse(searchBase, true)
   formatted.query.keywords = keyword
   const url = format(formatted)
-  debug('GET %o', url)
 
   const res = await fetch(`${corsProxy}${url}`)
-  if (!res.ok) {
-    throw new Error()
-  }
 
   const body = await res.json()
   if (body.errors) {
@@ -51,12 +48,8 @@ export async function streams (station) {
   delete formatted.search
   formatted.query.stream_ids = id
   const url = format(formatted)
-  debug('GET %o', url)
 
   const res = await fetch(`${corsProxy}${url}`)
-  if (!res.ok) {
-    throw new Error()
-  }
 
   const body = await res.json()
   if (body.errors) {
