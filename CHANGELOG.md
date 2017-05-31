@@ -1,3 +1,9 @@
+1.0.3 / 2017-05-31
+==================
+
+* [[`ac046b0bc4`](https://github.com/TooTallNate/iheart/commit/ac046b0bc4)] - remove commented code (Nathan Rajlich)
+* [[`39bb4bf6dd`](https://github.com/TooTallNate/iheart/commit/39bb4bf6dd)] - use `async-retry` (Nathan Rajlich)
+
 1.0.2 / 2017-05-07
 ==================
 
