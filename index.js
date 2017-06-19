@@ -10,8 +10,8 @@ const debug = createDebug('iheart')
 // go through a CORS reverse proxy so that these APIs work in the web browser
 const corsProxy = 'https://cors.now.sh/'
 
-const searchBase = 'http://api.iheart.com/api/v1/catalog/searchAll'
-const streamsBase = 'http://proxy.iheart.com/streams_list_by_ids/?stream_ids=<stream id here>&apikey=null'
+const searchBase  = 'https://api.iheart.com/api/v1/catalog/searchAll'
+const streamsBase = 'https://api.iheart.com/api/v2/content/liveStations/'
 
 /**
  *
@@ -36,19 +36,15 @@ export async function search (keyword) {
 
 
 /**
- *
+ * Gets the raw stream URL of the given Station or Station ID.
  */
-export async function streams (station) {
-  const id = station.id || station
+export async function streamURL (_station) {
+  const id = _station.id || _station
   if ('number' !== typeof id) {
     throw new TypeError('a number station "id" is required')
   }
 
-  const formatted = parse(streamsBase, true)
-  delete formatted.search
-  formatted.query.stream_ids = id
-  const url = format(formatted)
-
+  let url = streamsBase + id
   const res = await fetch(`${corsProxy}${url}`)
 
   const body = await res.json()
@@ -56,31 +52,17 @@ export async function streams (station) {
     // body.firstError
   }
 
-  const imgURLs = new Map()
-  body.img_urls.forEach((o) => {
-    imgURLs.set(o.image_url_id, o.image_url)
-  })
+  const station = body.hits[0]
+  const { streams } = station
+  if (!streams) {
+    throw new Error('No `streams` given')
+  }
 
-  // absolutize the relativized logo URLs before responding
-  return body.streams.map((stream) => {
-    for (const key of Object.keys(stream)) {
-      const value = stream[key]
-      if ('string' === typeof value) {
-        stream[key] = value.replace(/\{(.+)\}/, (match, inner) => {
-          const baseURL = imgURLs.get(Number(inner.substring(inner.lastIndexOf('_') + 1)))
-          return baseURL + value.substring(match.length)
-        })
-      }
-    }
-    return stream
-  })
-}
+  url = streams.secure_pls_stream
+    || streams.pls_stream
+    || streams.stw_stream
+    || streams[Object.keys(streams)[0]]
 
-/**
- * Gets the raw stream URL of a given "station stream"
- */
-export async function streamURL (stream) {
-  let { url } = stream
   if ('.pls' === extname(url).toLowerCase()) {
     debug('attempting to resolve "pls" file %o', url)
     const res = await fetch(`${corsProxy}${url}`)
@@ -88,6 +70,7 @@ export async function streamURL (stream) {
     debug('pls file: %O', body)
     url = body.playlist.File1
   }
+
   debug('stream URL: %o', url)
   return url
 }
