@@ -1,6 +1,6 @@
 {
   "name": "iheart",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "iHeart Radio JavaScript API",
   "main": "./build/index.js",
   "scripts": {

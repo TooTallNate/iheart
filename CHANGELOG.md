@@ -1,4 +1,9 @@
 
+2.0.1 / 2017-05-31
+==================
+
+* [[`25801cde3f`](https://github.com/TooTallNate/iheart/commit/25801cde3f)] - add shoutcast streams to preferred streams list (Nathan Rajlich)
+
 2.0.0 / 2017-05-31
 ==================
 
