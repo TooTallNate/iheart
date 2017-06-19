@@ -61,6 +61,8 @@ export async function streamURL (_station) {
   url = streams.secure_pls_stream
     || streams.pls_stream
     || streams.stw_stream
+    || streams.secure_shoutcast_stream
+    || streams.shoutcast_stream
     || streams[Object.keys(streams)[0]]
 
   if ('.pls' === extname(url).toLowerCase()) {
