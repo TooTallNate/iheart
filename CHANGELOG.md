@@ -1,3 +1,10 @@
+
+2.0.0 / 2017-05-31
+==================
+
+* **BREAKING:** Removed the `streams()` function. Just pass the Station or Station ID directly to `streamURL()` now
+* [[`c50290276e`](https://github.com/TooTallNate/iheart/commit/c50290276e)] - update for API v2 streams URL (Nathan Rajlich)
+
 1.0.3 / 2017-05-31
 ==================
 
