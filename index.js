@@ -10,8 +10,7 @@ const debug = createDebug('iheart')
 // go through a CORS reverse proxy so that these APIs work in the web browser
 const corsProxy = 'https://cors.now.sh/'
 
-const searchBase =
-  'https://api.iheart.com/api/v3/search/all?keywords=<search term>&bundle=false&keyword=true&maxRows=3&countryCode=US&startIndex=0&station=true&artist=true&track=true&playlist=true&talkShow=true'
+const searchBase  = 'https://api.iheart.com/api/v1/catalog/searchAll'
 const streamsBase = 'https://api.iheart.com/api/v2/content/liveStations/'
 
 /**
@@ -23,7 +22,6 @@ async function search(keyword) {
   }
 
   const formatted = parse(searchBase, true)
-  delete formatted.search
   formatted.query.keywords = keyword
   const url = format(formatted)
 
@@ -33,7 +31,7 @@ async function search(keyword) {
   if (body.errors) {
     // body.firstError
   }
-  return body.results
+  return body
 }
 
 /**
