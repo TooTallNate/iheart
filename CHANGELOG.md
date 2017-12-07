@@ -1,3 +1,7 @@
+3.0.0 / 2017-12-07
+==================
+
+* [[`4da834f6ee`](https://github.com/TooTallNate/iheart/commit/4da834f6ee)] - remove build step (Nathan Rajlich)
 
 2.0.1 / 2017-05-31
 ==================
