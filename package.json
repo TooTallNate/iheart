@@ -2,11 +2,7 @@
   "name": "iheart",
   "version": "2.0.1",
   "description": "iHeart Radio JavaScript API",
-  "main": "./build/index.js",
-  "scripts": {
-    "prepublish": "n8-make",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "main": "./index.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/TooTallNate/iheart.git"
@@ -31,8 +27,5 @@
     "debug": "^2.5.2",
     "ini": "^1.3.4",
     "isomorphic-fetch": "^2.2.1"
-  },
-  "devDependencies": {
-    "n8-make": "^1.8.0"
   }
 }

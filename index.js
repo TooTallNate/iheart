@@ -1,22 +1,23 @@
-import { extname } from 'path'
-import createDebug from 'debug'
-import { parse, format } from 'url'
-import { parse as parseIni } from 'ini'
+const { extname } = require('path')
+const createDebug = require('debug')
+const { parse, format } = require('url')
+const { parse: parseIni } = require('ini')
 
-import fetch from './fetch'
+const fetch = require('./fetch')
 
 const debug = createDebug('iheart')
 
 // go through a CORS reverse proxy so that these APIs work in the web browser
 const corsProxy = 'https://cors.now.sh/'
 
-const searchBase  = 'https://api.iheart.com/api/v3/search/all?keywords=<search term>&bundle=false&keyword=true&maxRows=3&countryCode=US&startIndex=0&station=true&artist=true&track=true&playlist=true&talkShow=true'
+const searchBase =
+  'https://api.iheart.com/api/v3/search/all?keywords=<search term>&bundle=false&keyword=true&maxRows=3&countryCode=US&startIndex=0&station=true&artist=true&track=true&playlist=true&talkShow=true'
 const streamsBase = 'https://api.iheart.com/api/v2/content/liveStations/'
 
 /**
- *
+ * Searches for radio streams matching `keyword`.
  */
-export async function search (keyword) {
+async function search(keyword) {
   if ('string' !== typeof keyword) {
     throw new TypeError('a string "keyword" is required')
   }
@@ -35,11 +36,10 @@ export async function search (keyword) {
   return body.results
 }
 
-
 /**
  * Gets the raw stream URL of the given Station or Station ID.
  */
-export async function streamURL (_station) {
+async function streamURL(_station) {
   const id = _station.id || _station
   if ('number' !== typeof id) {
     throw new TypeError('a number station "id" is required')
@@ -59,12 +59,13 @@ export async function streamURL (_station) {
     throw new Error('No `streams` given')
   }
 
-  url = streams.secure_pls_stream
-    || streams.pls_stream
-    || streams.stw_stream
-    || streams.secure_shoutcast_stream
-    || streams.shoutcast_stream
-    || streams[Object.keys(streams)[0]]
+  url =
+    streams.secure_pls_stream ||
+    streams.pls_stream ||
+    streams.stw_stream ||
+    streams.secure_shoutcast_stream ||
+    streams.shoutcast_stream ||
+    streams[Object.keys(streams)[0]]
 
   if ('.pls' === extname(url).toLowerCase()) {
     debug('attempting to resolve "pls" file %o', url)
@@ -77,3 +78,8 @@ export async function streamURL (_station) {
   debug('stream URL: %o', url)
   return url
 }
+
+module.exports = {
+  search,
+  streamURL
+};
