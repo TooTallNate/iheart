@@ -22,14 +22,10 @@ $ npm install --save iheart
 const matches = await iheart.search(process.argv[2] || '1077 the bone')
 const station = matches.stations[0]
 
-// get a list of "stream" objects for the station, pick the first one
-const streams = await iheart.streams(station)
-const stream = streams[0]
-
 // finally you can get the source stream URL which can
 // be requested over HTTP and fed into an audio decoder,
 // or whatever your application does with it…
-const url = await iheart.streamURL(stream)
+const url = await iheart.streamURL(station)
 
 console.log(url)
 // https://18533.live.streamtheworld.com:443/KSANFMAAC_SC
