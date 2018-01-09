@@ -42,9 +42,9 @@ async function search(keyword, options) {
 }
 
 /**
- * Gets the raw stream URL of the given Station or Station ID.
+ * Searches for a station by Id
  */
-async function streamURL(_station, options) {
+async function getById(_station, options) {
   const id = _station.id || _station
   if ('number' !== typeof id) {
     throw new TypeError('a number station "id" is required')
@@ -59,8 +59,14 @@ async function streamURL(_station, options) {
     // body.firstError
   }
 
-  const station = body.hits[0]
-  const { streams } = station
+  return body.hits[0];
+}
+
+/**
+ * Gets the raw stream URL of the given Station or Station ID.
+ */
+async function streamURL(_station, options) {
+  const { streams } = await getById(_station, options)
   if (!streams) {
     throw new Error('No `streams` given')
   }
@@ -87,5 +93,6 @@ async function streamURL(_station, options) {
 
 module.exports = {
   search,
+  getById,
   streamURL
 };
