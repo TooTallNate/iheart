@@ -31,6 +31,21 @@ console.log(url)
 // https://18533.live.streamtheworld.com:443/KSANFMAAC_SC
 ```
 
+Both `search` and `streamURL` have an option to specify CORS proxy
+so that these APIs work in the web browser
+
+```js
+// use specific proxy
+const matches2 = await iheart.search('MyFM', { proxy: 'https://mycoolproxy.com' })
+// use default proxy
+// (which is https://cors.now.sh/ if inside a browser or no proxy if not)
+const matches3 = await iheart.search('Jazz')
+// do not use proxy (good for server side code)
+const url2 = await iheart.streamURL(station, { proxy: null })
+// another way to disable proxy
+const url3 = await iheart.streamURL(station, { proxy: '' })
+```
+
 
 License
 -------
