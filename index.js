@@ -8,19 +8,27 @@ const fetch = require('./fetch')
 const debug = createDebug('iheart')
 
 // go through a CORS reverse proxy so that these APIs work in the web browser
-const corsProxy = 'https://cors.now.sh/'
+const corsDefaultProxy = 'https://cors.now.sh/'
 
 const searchBase  = 'https://api.iheart.com/api/v1/catalog/searchAll'
 const streamsBase = 'https://api.iheart.com/api/v2/content/liveStations/'
 
+function getProxyURL(options) {
+  return options && 'string' === typeof options.proxy
+    ? options.proxy
+    : options && null === options.proxy ? '' : corsDefaultProxy
+}
+
+
 /**
  * Searches for radio streams matching `keyword`.
  */
-async function search(keyword) {
+async function search(keyword, options) {
   if ('string' !== typeof keyword) {
     throw new TypeError('a string "keyword" is required')
   }
 
+  const corsProxy = getProxyURL(options)
   const formatted = parse(searchBase, true)
   formatted.query.keywords = keyword
   const url = format(formatted)
@@ -37,12 +45,13 @@ async function search(keyword) {
 /**
  * Gets the raw stream URL of the given Station or Station ID.
  */
-async function streamURL(_station) {
+async function streamURL(_station, options) {
   const id = _station.id || _station
   if ('number' !== typeof id) {
     throw new TypeError('a number station "id" is required')
   }
 
+  const corsProxy = getProxyURL(options)
   let url = streamsBase + id
   const res = await fetch(`${corsProxy}${url}`)
 
