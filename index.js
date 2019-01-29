@@ -83,6 +83,7 @@ async function streamURL(_station, options) {
 
   if ('.pls' === extname(url).toLowerCase()) {
     debug('attempting to resolve "pls" file %o', url);
+    const corsProxy = getProxyURL(options);
     const res = await fetch(`${corsProxy}${url}`);
     const body = parseIni(await res.text());
     debug('pls file: %O', body);
